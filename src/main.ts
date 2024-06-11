@@ -472,3 +472,60 @@ function calc(param1: number, param2: number, callback: CallbackType): void {
 // Приклади використання calc з різними функціями зворотного виклику
 calc(1, 1, (num1, num2) => num1 + num2);
 calc(10, 5, (num1, num2) => num1 - num2);
+
+// Custom Types;
+
+// type User = {
+//   id: number;
+//   name: string;
+// };
+
+// const user: User = {
+//   id: 1,
+//   name: "Alice",
+// };
+
+// type Coordinate = [number, number];
+
+// type UserWithCoords = {
+//   id: number;
+//   name: string;
+//   coords: Coordinate;
+// };
+
+// const userWithCoords: UserWithCoords = {
+//   id: 1,
+//   name: "Alice",
+//   coords: [10, 20],
+// };
+
+enum AnimalIds {
+  cat = "cat",
+  dog = "dog",
+  fish = "fish",
+}
+
+type Animal = {
+  [AnimalIds.cat]: {
+    meow: () => string;
+  };
+  [AnimalIds.dog]: {
+    bark: () => string;
+  };
+  [AnimalIds.fish]: {
+    swim: () => undefined;
+  };
+};
+
+// Створення об'єктів типу Animal
+let cat: Animal[AnimalIds.cat] = {
+  meow: () => "Meow! I am a cat",
+};
+
+let dog: Animal[AnimalIds.dog] = {
+  bark: () => "Woof! I am a dog",
+};
+
+let fish: Animal[AnimalIds.fish] = {
+  swim: () => undefined,
+};
