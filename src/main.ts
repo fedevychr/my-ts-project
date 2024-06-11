@@ -125,17 +125,17 @@ console.log("numbers: ", numbers);
 // ];
 // console.log("users: ", users);
 
-type User = {
-  name: string;
-  age: number;
-};
+// type User = {
+//   name: string;
+//   age: number;
+// };
 
-let users: User[] = [
-  { name: "Tom", age: 30 },
-  { name: "Jack", age: 25 },
-  { name: "Alice", age: 32 },
-];
-console.log("users: ", users);
+// let users: User[] = [
+//   { name: "Tom", age: 30 },
+//   { name: "Jack", age: 25 },
+//   { name: "Alice", age: 32 },
+// ];
+// console.log("users: ", users);
 
 let arrAny: any[];
 arrAny = [123, "TEXT", { name: "Tom" }, [1, 2, 3]];
@@ -367,3 +367,108 @@ console.log("ceo: ", ceo);
 
 // let myButtonStyle = getButtonStyle("medium"); // OK
 // myButtonStyle = getButtonStyle("extra-large"); // Error: Argument of type '"extra-large"' is not assignable to parameter of type 'ButtonSize'.
+
+///////////////////////////////////////////
+
+// Return Type;
+
+// function greet(): string {
+//   return "Hello, world!";
+// }
+
+// let result = greet();
+// console.log("result: ", result);
+
+// function greet(): string {
+//   return 100; // Error: Type 'number' is not assignable to type 'string'
+// }
+
+// let result = greet();
+// console.log("result: ", result);
+
+// const greet = (): string => {
+//   return "Hello, world!";
+// };
+
+// let result = greet();
+// console.log("result: ", result);
+
+// type User = {
+//   id: number;
+//   name: string;
+// };
+
+// const getUserNames = (users: User[]): string[] => {
+//   return users.map((user) => user.name);
+// };
+
+// const users: User[] = [
+//   { id: 1, name: "Alice" },
+//   { id: 2, name: "Bob" },
+//   { id: 3, name: "Charlie" },
+// ];
+
+// let result = getUserNames(users);
+// console.log(result); // ['Alice', 'Bob', 'Charlie']
+
+function greet() {
+  return "Hello, world!";
+}
+
+let result: string = greet();
+console.log("result: ", result);
+
+// Void;
+
+function logMessage(message: string): void {
+  console.log(message);
+}
+
+logMessage("Hello, world!");
+
+function doSomething(callback: () => void) {
+  callback();
+}
+
+doSomething(() => {
+  console.log("Callback function!");
+});
+
+// Never;
+
+// // Функція, яка завжди викидає помилку
+// function throwError(message: string): never {
+//   throw new Error(message);
+// }
+
+// // Функція з нескінченним циклом
+// function infiniteLoop(): never {
+//   while (true) {}
+// }
+
+// let value: never;
+
+// value = 123;
+// value = "hello";
+
+// Function Type;
+
+let myFunc: (firstArg: string, secondArg: number) => void;
+
+myFunc = (first: string, second: number) => {
+  console.log(`First: ${first}, Second: ${second}`);
+};
+
+myFunc("Hello", 42); // Висновок: "First: Hello, Second: 42"
+
+// Визначення типу функції, який приймає два числа та повертає число
+type CallbackType = (num1: number, num2: number) => number;
+
+// Функція, яка приймає два числа та функцію зворотного виклику, застосовує цю функцію до чисел та виводить результат
+function calc(param1: number, param2: number, callback: CallbackType): void {
+  console.log("Result:", callback(param1, param2));
+}
+
+// Приклади використання calc з різними функціями зворотного виклику
+calc(1, 1, (num1, num2) => num1 + num2);
+calc(10, 5, (num1, num2) => num1 - num2);
