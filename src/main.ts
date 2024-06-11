@@ -411,12 +411,12 @@ console.log("ceo: ", ceo);
 // let result = getUserNames(users);
 // console.log(result); // ['Alice', 'Bob', 'Charlie']
 
-function greet() {
-  return "Hello, world!";
-}
+// function greet() {
+//   return "Hello, world!";
+// }
 
-let result: string = greet();
-console.log("result: ", result);
+// let result: string = greet();
+// console.log("result: ", result);
 
 // Void;
 
@@ -472,6 +472,8 @@ function calc(param1: number, param2: number, callback: CallbackType): void {
 // Приклади використання calc з різними функціями зворотного виклику
 calc(1, 1, (num1, num2) => num1 + num2);
 calc(10, 5, (num1, num2) => num1 - num2);
+
+//////////////////////////////////////
 
 // Custom Types;
 
@@ -529,3 +531,111 @@ let dog: Animal[AnimalIds.dog] = {
 let fish: Animal[AnimalIds.fish] = {
   swim: () => undefined,
 };
+
+////////////////////////////////////////
+
+// Опціональні параметри та властивості;
+
+function greet(name?: string) {
+  if (name) {
+    return `Hello, ${name}!`;
+  } else {
+    return `Hello!`;
+  }
+}
+
+console.log(greet("Alice")); // Виводить: Hello, Alice!
+console.log(greet()); // Виводить: Hello!
+
+type Person = {
+  name: string;
+  age?: number; // age є опціональною властивістю
+};
+
+const alice: Person = { name: "Alice", age: 27 };
+const bob: Person = { name: "Bob" }; // age не вказано, це припустимо
+
+// Різниця між Type та Interface;
+
+// interface Animal {
+//   name: string;
+// }
+
+// interface Animal {
+//   age: number;
+// }
+
+// let dog: Animal = {
+//   name: "Fido",
+//   age: 5,
+// };
+
+// interface Dog extends Animal {
+//   bark: string;
+// }
+
+// type AnimalName = {
+//   name: string;
+// };
+
+// type AnimalAge = {
+//   age: number;
+// };
+
+// type Animal = AnimalName & AnimalAge;
+
+// let dog: Animal = {
+//   name: "Fido",
+//   age: 5,
+// };
+
+// type Cat = {
+//   meow: () => string;
+// };
+
+// interface Dog {
+//   bark: () => string;
+// }
+
+// type DogOrCat = Dog | Cat;
+// type DogAndCat = Dog & Cat;
+
+// interface Animal {
+//   name: string;
+// }
+
+// interface Dog extends Animal {
+//   bark: string;
+// }
+
+// class MyDog implements Dog {
+//   name = "Fido";
+//   bark = "Woof!";
+// }
+
+// // Error: Property 'name' is missing in type 'OtherDog'
+// class OtherDog implements Dog {
+//   bark = "Woof!";
+// }
+
+// interface Walkable {
+//   walk(): void;
+// }
+
+// interface Eatable {
+//   eat(): void;
+// }
+
+// class Animal implements Walkable, Eatable {
+//   walk() {
+//     console.log("The animal walks...");
+//   }
+
+//   eat() {
+//     console.log("The animal eats...");
+//   }
+// }
+
+// const animal = new Animal();
+
+/////////////////////////////////////
