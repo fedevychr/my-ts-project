@@ -536,24 +536,24 @@ let fish: Animal[AnimalIds.fish] = {
 
 // Опціональні параметри та властивості;
 
-function greet(name?: string) {
-  if (name) {
-    return `Hello, ${name}!`;
-  } else {
-    return `Hello!`;
-  }
-}
+// function greet(name?: string) {
+//   if (name) {
+//     return `Hello, ${name}!`;
+//   } else {
+//     return `Hello!`;
+//   }
+// }
 
-console.log(greet("Alice")); // Виводить: Hello, Alice!
-console.log(greet()); // Виводить: Hello!
+// console.log(greet("Alice")); // Виводить: Hello, Alice!
+// console.log(greet()); // Виводить: Hello!
 
-type Person = {
-  name: string;
-  age?: number; // age є опціональною властивістю
-};
+// type Person = {
+//   name: string;
+//   age?: number; // age є опціональною властивістю
+// };
 
-const alice: Person = { name: "Alice", age: 27 };
-const bob: Person = { name: "Bob" }; // age не вказано, це припустимо
+// const alice: Person = { name: "Alice", age: 27 };
+// const bob: Person = { name: "Bob" }; // age не вказано, це припустимо
 
 // Різниця між Type та Interface;
 
@@ -639,3 +639,127 @@ const bob: Person = { name: "Bob" }; // age не вказано, це припу
 // const animal = new Animal();
 
 /////////////////////////////////////
+
+// Інтерфейси;
+
+interface Person {
+  firstName: string;
+  lastName: string;
+  age?: number; // Необов'язкове поле
+}
+
+function greet(person: Person) {
+  console.log(`Hello, ${person.firstName} ${person.lastName}`);
+}
+
+const john: Person = {
+  firstName: "John",
+  lastName: "Doe",
+};
+
+greet(john); // Виведе: "Hello, John Doe"
+
+// Інтерфейси об'єктів;
+
+// interface IPerson {
+//   name: string;
+//   age: number;
+//   greet(phrase: string): void;
+// }
+
+// let user: IPerson;
+
+// user = {
+//   name: "Anthony",
+//   age: 21,
+//   greet(phrase) {
+//     console.log(phrase + " " + this.name);
+//   },
+// };
+
+// user.greet("Вітання всім, я"); // Вітання всім, я Anthony
+
+// const user = {
+//   name: "Anthony",
+//   age: 21,
+//   hobby: "Flying", // Помилка: Property 'hobby' does not exist on type 'IPerson'.
+// };
+
+// type IPerson = {
+//   name: string;
+//   age: number;
+//   greet(phrase: string): void;
+// };
+
+// let user: IPerson;
+
+// user = {
+//   name: "Anthony",
+//   age: 21,
+//   greet(phrase) {
+//     console.log(phrase + " " + this.name);
+//   },
+// };
+
+// Readonly;
+
+// interface ITest {
+//   readonly name: string;
+// }
+
+// const person: ITest = {
+//   name: "Person Name",
+// };
+
+// person.name = "Another Name";
+// // Error: Cannot assign to 'name' because it is a read-only property.
+
+// Extending Interfaces;
+
+interface IPerson {
+  name: string;
+  age: number;
+  greet(phrase: string): void;
+}
+
+interface IPilot extends IPerson {
+  flyMessage(): void;
+}
+
+// Інтерфейси як тип функції;
+
+// type AddFunc = (n1: number, n2: number) => number;
+
+// let add: AddFunc;
+
+// add = (n1: number, n2: number) => {
+//   return n1 + n2;
+// };
+
+// interface AddFunc {
+//   (n1: number, n2: number): number;
+// }
+
+// let add: AddFunc;
+
+// add = (n1: number, n2: number) => {
+//   return n1 + n2;
+// };
+
+// Опціональні властивості;
+
+// interface IPerson {
+//   name?: string;
+//   age: number;
+// }
+
+// const mango: IPerson = {
+//   name: "mango",
+//   age: 2,
+// };
+
+// const poly: IPerson = {
+//   age: 5,
+// };
+
+/////////////////////////////////
