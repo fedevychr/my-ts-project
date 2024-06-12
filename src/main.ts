@@ -811,22 +811,423 @@ interface IPilot extends IPerson {
 //   country: "Ukraine",
 // };
 
-type User = {
-  id: string;
-  name: string;
-  email: string;
-};
+// type User = {
+//   id: string;
+//   name: string;
+//   email: string;
+// };
 
-type Users = {
-  [id: string]: User;
-};
+// type Users = {
+//   [id: string]: User;
+// };
 
-let users: Users = {};
+// let users: Users = {};
 
-let user: User = {
-  id: "1",
-  name: "Alex",
-  email: "alex@example.com",
-};
+// let user: User = {
+//   id: "1",
+//   name: "Alex",
+//   email: "alex@example.com",
+// };
 
-users[user.id] = user;
+// users[user.id] = user;
+
+///////////////////////////////////
+
+// Generics;
+
+// let arr: any[] = [];
+
+// let arr: Array<string | number> = [];
+
+// let arr: Array<string | number> = [];
+
+// arr = ["str", 10, true];
+
+const promise: Promise<string> = new Promise((resolve) => {
+  setInterval(() => {
+    resolve("Done!");
+  }, 1000);
+});
+
+promise.then((data) => {
+  console.log(data);
+});
+
+// Generic function/method;
+
+// let output1 = identity<string>("myString");
+// let output2 = identity<number>(100);
+
+// let output1 = identity("myString");
+// let output2 = identity(100);
+
+// function firstElement<T>(arr: T[]): T {
+//   return arr[0];
+// }
+
+// let numbers = [1, 2, 3, 4, 5];
+// let firstNum = firstElement(numbers);
+
+// let strings = ["a", "b", "c", "d"];
+// let firstStr = firstElement(strings);
+
+// function merge(objA: object, objB: object) {
+//   return Object.assign(objA, objB);
+// }
+
+// const merged = merge({ name: "Alisa" }, { age: 28 });
+
+// merged.name;
+
+// const merged = merge({ name: "Alisa" }, { age: 28 }) as {
+//   name: string;
+//   age: number;
+// };
+
+// function merge<T, U>(objA: T, objB: U) {
+//   return Object.assign(objA, objB);
+// }
+
+// const merged = merge({ name: "Alisa" }, { age: 28 });
+
+// merged.name;
+
+// const merged: {
+//   name: string;
+// } & {
+//   age: number;
+// };
+
+// type Person = {
+//   name: string;
+// };
+
+// type AdditionFields = {
+//   age: number;
+// };
+
+// function merge<T, U>(objA: T, objB: U) {
+//   return Object.assign(objA, objB);
+// }
+
+// const merged = merge<Person, AdditionFields>({ name: "Alisa" }, { age: 28 });
+
+// merged.name;
+
+// Extends;
+
+// const merged = merge({ name: 'Alisa' }, 'TEXT'); // {0: 'T', 1: 'E', 2: 'X', 3: 'T', name: 'Alisa'}
+
+// function merge<T extends object, U extends object>(objA: T, objB: U) {
+//   return Object.assign(objA, objB);
+// }
+
+// const merged = merge({ name: "Alisa" }, "TEXT");
+
+// merged.name;
+
+// type Length = {
+//   length: number;
+// };
+
+// function getLength<T extends Length>(str: T) {
+//   return str.length;
+// }
+
+// getLength("text");
+// getLength([1, 2, 3]);
+// getLength(100); // Errro: Argument of type 'number' is not assignable to parameter of type 'ILength'
+
+// function arrayLogger<T extends Array<string>>(array: T): void {
+//   array.forEach((item) => console.log(item));
+// }
+
+// arrayLogger(['Hello', 'World']); // Ok
+// arrayLogger([1, 2, 3]); // Error
+
+// keyof;
+
+// type Person = {
+//   name: string;
+//   age: number;
+//   location: string;
+// };
+
+// type PersonKeys = keyof Person; // 'name' | 'age' | 'location'
+
+// type Person = {
+//   name: string;
+//   age: number;
+//   location: string;
+// };
+
+// type PersonKeys = keyof Person; // 'name' | 'age' | 'location'
+
+// function getPersonInfo(person: Person, key: PersonKeys) {
+//   return person[key];
+// }
+
+// const john: Person = {
+//   name: "John",
+//   age: 25,
+//   location: "NY",
+// };
+
+// console.log(getPersonInfo(john, "age")); // 25
+// console.log(getPersonInfo(john, "name")); // 'John'
+// console.log(getPersonInfo(john, "job")); // Error: Argument of type '"job"' is not assignable to parameter of type 'PersonKeys'.
+
+// function extractValue<T extends object, U>(obj: T, key: U) {
+//   return obj[key]; // Type 'U' cannot be used to index type 'T'
+// }
+
+// extractValue({ name: "John" }, "name");
+
+// function extractValue<T extends object, U extends keyof T>(obj: T, key: U) {
+//   return obj[key];
+// }
+
+// extractValue({ name: "John" }, "name");
+
+// Generic Classes;
+
+// class DataStorage<T> {
+//   private data: T[] = [];
+
+//   addItem(item: T) {
+//     this.data.push(item);
+//   }
+
+//   getItems() {
+//     return [...this.data];
+//   }
+// }
+
+// const textStorage = new DataStorage<string>();
+// textStorage.addItem("Hello");
+// textStorage.addItem("World");
+// console.log(textStorage.getItems()); // ['Hello', 'World']
+// textStorage.addItem(1); // Error: Argument of type 'number' is not assignable to parameter of type 'string'
+
+// const numberStorage = new DataStorage<number>();
+// numberStorage.addItem(1);
+// numberStorage.addItem(2);
+// console.log(numberStorage.getItems()); // [1, 2]
+// numberStorage.addItem("TEXT"); // Error: Argument of type 'number' is not assignable to parameter of type 'number'
+
+// textStorage.addItem(1); // Error: Argument of type 'number' is not assignable to parameter of type 'string'
+
+// numberStorage.addItem('TEXT'); // Error: Argument of type 'number' is not assignable to parameter of type 'number'
+
+class KeyValuePair<TKey, TValue> {
+  constructor(private key: TKey, private value: TValue) {}
+
+  getKey(): TKey {
+    return this.key;
+  }
+
+  getValue(): TValue {
+    return this.value;
+  }
+}
+
+const pair1 = new KeyValuePair("name", "Alice");
+console.log(pair1.getKey()); // 'name'
+console.log(pair1.getValue()); // 'Alice'
+
+const pair2 = new KeyValuePair(1, true);
+console.log(pair2.getKey()); // 1
+console.log(pair2.getValue()); // true
+
+// Utility Types;
+
+// https://www.typescriptlang.org/docs/handbook/utility-types.html
+
+// Partial<T>;
+
+// type User = {
+//   id: number;
+//   name: string;
+//   email: string;
+//   registered: boolean;
+// };
+
+// function createUser(data: Partial<User>): User {
+//   // Деякі значення за замовчуванням:
+//   const defaultUser: User = {
+//     id: Date.now(),
+//     name: "",
+//     email: "",
+//     registered: false,
+//   };
+
+//   // З'єднуємо дані користувача та значення за замовчуванням
+//   return { ...defaultUser, ...data };
+// }
+
+// const newUser = createUser({ name: "Alice", email: "alice@example.com" });
+
+// console.log(newUser);
+
+// Readonly<T>;
+
+// type User = {
+//   id: number;
+//   name: string;
+//   email: string;
+// };
+
+// let alice: User = {
+//   id: 1,
+//   name: "Alice",
+//   email: "alice@example.com",
+// };
+
+// alice.name = "Bob"; // OK
+
+// let aliceReadonly: Readonly<User> = {
+//   id: 1,
+//   name: "Alice",
+//   email: "alice@example.com",
+// };
+
+// user.name = "Bob"; // Error: Cannot assign to 'name' because it is a read-only property.
+
+// const arr: Readonly<string[]> = ["One", "Two", "Three"];
+
+// arr.push("Four"); // Error: Property 'push' does not exist on type 'readonly string[]'.
+
+// Pick<T, K>;
+
+// type User = {
+//   id: number;
+//   name: string;
+//   email: string;
+// };
+
+// type UserBasicInfo = Pick<User, "id" | "name">;
+
+// let userBasicInfo: UserBasicInfo = {
+//   id: 1,
+//   name: "John Doe",
+//   email: "john@example.com", // Error: Property 'email' does not exist on type 'UserBasicInfo'
+// };
+
+// type BaseEmployee = {
+//   id: number;
+//   firstName: string;
+//   lastName: string;
+//   position: string;
+//   department: string;
+//   startDate: Date;
+//   // ...і багато інших полів
+// };
+
+// type BaseProject = {
+//   id: number;
+//   name: string;
+//   budget: number;
+//   deadline: Date;
+//   // ...і багато інших полів
+// };
+
+// type Assignment = {
+//   employee: Pick<BaseEmployee, "id" | "firstName" | "lastName">;
+//   projects: Pick<BaseProject, "id" | "name" | "deadline">[];
+//   shouldNotifyEmployee?: boolean;
+// };
+
+// // Record<K, T>;
+
+// type Weekdays = "Mon" | "Tue" | "Wed" | "Thu" | "Fri";
+// type Weekend = "Sat" | "Sun";
+
+// type Day = Weekdays | Weekend;
+
+// type DayTranslations = Record<Day, string>;
+
+// const translations: DayTranslations = {
+//   Mon: "Понеділок",
+//   Tue: "Вівторок",
+//   Wed: "Середа",
+//   Thu: "Четверг",
+//   Fri: "П'ятниця",
+//   Sat: "Субота",
+//   Sun: "Неділя",
+// };
+
+// enum UserRoles {
+//   admin = "admin",
+//   manager = "manager",
+//   employee = "manager",
+// }
+
+// type UserRolesStatuses = Record<UserRoles, boolean>;
+
+// const userRoleStatuses: UserRolesStatuses = {
+//   [UserRoles.admin]: true,
+//   [UserRoles.manager]: false,
+//   [UserRoles.employee]: true,
+// };
+
+// type InitialFormType = {
+//   name: string;
+//   email: string;
+//   password: string;
+// };
+
+// export type Form = InitialFormType & {
+//   errors: Partial<Record<keyof InitialFormType, [string]>>;
+// };
+
+// Omit<T, K>;
+
+// type Person = {
+//   name: string;
+//   age: number;
+//   location: string;
+// };
+
+// type PersonWithoutLocation = Omit<Person, "location">;
+
+// ReturnType<T>;
+
+// function greeting() {
+//   return "Hello, world!";
+// }
+
+// type Greeting = ReturnType<typeof greeting>; // 'string'
+
+// function multiply(a: number, b: number) {
+//   return a * b;
+// }
+
+// type MultiplyResult = ReturnType<typeof multiply>; // 'number'
+
+// type Callback = (...args: unknown[]) => unknown;
+
+// function createLoggedFunction<T extends Callback>(func: T) {
+//   let funcRef = func;
+
+//   const loggedFunction = (...args: Parameters<T>) => {
+//     console.log(`Function ${func.name} was called with arguments:`, args);
+//     const result = funcRef(...args) as ReturnType<T>;
+//     return result;
+//   };
+
+//   return loggedFunction;
+// }
+
+// Parameters<T>;
+
+// type MyFunctionType = (a: string, b: number, c: boolean) => void;
+
+// type MyParametersType = Parameters<MyFunctionType>;
+// // Результат: [string, number, boolean]
+
+// NonNullable<T>;
+
+// type SomeType = string | null | undefined;
+
+// // NonNullableType будет равен 'string'
+// type NonNullableType = NonNullable<SomeType>;
