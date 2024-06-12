@@ -642,22 +642,22 @@ let fish: Animal[AnimalIds.fish] = {
 
 // Інтерфейси;
 
-interface Person {
-  firstName: string;
-  lastName: string;
-  age?: number; // Необов'язкове поле
-}
+// interface Person {
+//   firstName: string;
+//   lastName: string;
+//   age?: number; // Необов'язкове поле
+// }
 
-function greet(person: Person) {
-  console.log(`Hello, ${person.firstName} ${person.lastName}`);
-}
+// function greet(person: Person) {
+//   console.log(`Hello, ${person.firstName} ${person.lastName}`);
+// }
 
-const john: Person = {
-  firstName: "John",
-  lastName: "Doe",
-};
+// const john: Person = {
+//   firstName: "John",
+//   lastName: "Doe",
+// };
 
-greet(john); // Виведе: "Hello, John Doe"
+// greet(john); // Виведе: "Hello, John Doe"
 
 // Інтерфейси об'єктів;
 
@@ -763,3 +763,70 @@ interface IPilot extends IPerson {
 // };
 
 /////////////////////////////////
+
+// Advanced Types;
+
+// Type Casting;
+
+// let someValue: unknown = "this is a string";
+
+// let strLength1: number = (<string>someValue).length;
+// // or
+// let strLength2: number = (someValue as string).length;
+
+// let strLength3: number = someValue.length;
+
+// const input = document.getElementById("inputEmail");
+
+// input.value = "test@test.ts";
+
+// const input = <HTMLInputElement>document.getElementById("inputEmail");
+
+// input.value = "test@test.ts";
+
+// const input = document.getElementById("inputEmail") as HTMLInputElement;
+
+// input.value = "test@test.ts";
+
+// const input = document.getElementById("inputEmail");
+
+// if (input) {
+//   (input as HTMLInputElement).value = "test@test.ts";
+// }
+
+// Index Properties;
+
+// type IndexType = {
+//   [prop: string]: string;
+// };
+
+// type Person = {
+//   name: string;
+//   [x: string]: string;
+// };
+
+// const user: Person = {
+//   name: "Alex",
+//   gender: "MAN",
+//   country: "Ukraine",
+// };
+
+type User = {
+  id: string;
+  name: string;
+  email: string;
+};
+
+type Users = {
+  [id: string]: User;
+};
+
+let users: Users = {};
+
+let user: User = {
+  id: "1",
+  name: "Alex",
+  email: "alex@example.com",
+};
+
+users[user.id] = user;
